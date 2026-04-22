@@ -6,7 +6,7 @@ pub fn init_values() -> Grid[@sorted_set.SortedSet[Char]] {
 
 ///|
 pub fn solve_values(
-  values : Grid[@sorted_set.SortedSet[Char]]
+  values : Grid[@sorted_set.SortedSet[Char]],
 ) -> Grid[@sorted_set.SortedSet[Char]] {
   match search(values) {
     None => abort("solve() : cant solve")
@@ -19,7 +19,7 @@ pub fn ij_assign(
   values : Grid[@sorted_set.SortedSet[Char]],
   i : Int,
   j : Int,
-  val : Int
+  val : Int,
 ) -> Bool {
   let key = "\{Int::unsafe_to_char(rows[i].to_int())}\{Int::unsafe_to_char(cols[j].to_int())}"
   let val = Int::unsafe_to_char(val + 48)
@@ -30,7 +30,7 @@ pub fn ij_assign(
 pub fn ij_read(
   values : Grid[@sorted_set.SortedSet[Char]],
   i : Int,
-  j : Int
+  j : Int,
 ) -> Int {
   let key = "\{Int::unsafe_to_char(rows[i].to_int())}\{Int::unsafe_to_char(cols[j].to_int())}"
   let digit = values[key].min()

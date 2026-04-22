@@ -2,7 +2,7 @@
 fn eliminate(
   values : Grid[@sorted_set.SortedSet[Char]],
   key : String,
-  val : Char
+  val : Char,
 ) -> Bool {
   if !values[key].contains(val) {
     return true
@@ -40,7 +40,7 @@ fn eliminate(
 fn assign(
   values : Grid[@sorted_set.SortedSet[Char]],
   key : String,
-  val : Char
+  val : Char,
 ) -> Bool {
   let other_values = values[key].remove(val)
   let mut result = true
@@ -126,8 +126,7 @@ test {
       #| 5        6789     3       | 2        479      1       | 69       489      4689   
       #| 1        6789     4       | 589      579      5789    | 23569    23589    23689  
       #|
-    )
-    ,
+    ),
   )
   inspect(
     Grid::parse(grid2).format(),
@@ -144,7 +143,6 @@ test {
       #| 8  1  4 | 2  5  3 | 7  6  9
       #| 6  9  5 | 4  1  7 | 3  8  2
       #|
-    )
-    ,
+    ),
   )
 }

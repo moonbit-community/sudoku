@@ -1,0 +1,14 @@
+import {
+  "moonbitlang/core/immut/sorted_set",
+}
+
+options(
+  link: {
+    "wasm": {
+      "exports": [ "init_values", "solve_values", "ij_assign", "ij_read" ],
+    },
+    "wasm-gc": {
+      "exports": [ "init_values", "solve_values", "ij_assign", "ij_read" ],
+    },
+  },
+)
