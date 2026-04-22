@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "myfreess/sudoku"
+
+import {
+  "moonbitlang/core/immut/sorted_set",
+}
+
+// Values
+pub fn ij_assign(Grid[@sorted_set.SortedSet[Char]], Int, Int, Int) -> Bool
+
+pub fn ij_read(Grid[@sorted_set.SortedSet[Char]], Int, Int) -> Int
+
+pub fn init_values() -> Grid[@sorted_set.SortedSet[Char]]
+
+pub fn solve_values(Grid[@sorted_set.SortedSet[Char]]) -> Grid[@sorted_set.SortedSet[Char]]
+
+// Errors
+
+// Types and methods
+type Grid[T]
+
+// Type aliases
+
+// Traits
+
