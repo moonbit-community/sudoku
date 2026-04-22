@@ -1,12 +1,12 @@
 ///|
 fn search(
-  values : Grid[@immut/sorted_set.T[Char]]
-) -> Grid[@immut/sorted_set.T[Char]]? {
-  if values.contains(fn(digits) { not(digits.size() == 1) }) {
+  values : Grid[@sorted_set.SortedSet[Char]]
+) -> Grid[@sorted_set.SortedSet[Char]]? {
+  if values.contains(fn(digits) { !(digits.length() == 1) }) {
     let mut minsq = ""
     let mut n = 10
     for sq in squares {
-      let len = values[sq].size()
+      let len = values[sq].length()
       if len > 1 {
         if len < n {
           n = len
@@ -23,7 +23,7 @@ fn search(
           Some(v) => return Some(v)
         }
       }
-    } else {
+    } nobreak {
       return None
     }
   } else {

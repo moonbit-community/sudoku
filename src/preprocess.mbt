@@ -1,22 +1,22 @@
 ///|
 fn eliminate(
-  values : Grid[@immut/sorted_set.T[Char]],
+  values : Grid[@sorted_set.SortedSet[Char]],
   key : String,
   val : Char
 ) -> Bool {
-  if not(values[key].contains(val)) {
+  if !values[key].contains(val) {
     return true
   }
   values[key] = values[key].remove(val)
   // 如果key对应的可能性只剩下一种，则从key的邻近位置中消除此可能性
-  match values[key].size() {
+  match values[key].length() {
     1 => {
       let val = values[key].min()
       let mut res = true
       for key in peers[key] {
         res = res && eliminate(values, key, val)
       }
-      if not(res) {
+      if !res {
         return res
       }
     }
@@ -26,7 +26,7 @@ fn eliminate(
   // 如果key所在的unit中只剩下一个方块可容纳val, 则把val赋值给该方块
   let unit = units[key]
   let places = unit.filter(fn(sq) { values[sq].contains(val) })
-  match places.size() {
+  match places.length() {
     1 => {
       let key = places.min()
       return assign(values, key, val)
@@ -38,7 +38,7 @@ fn eliminate(
 
 ///|
 fn assign(
-  values : Grid[@immut/sorted_set.T[Char]],
+  values : Grid[@sorted_set.SortedSet[Char]],
   key : String,
   val : Char
 ) -> Bool {
@@ -51,8 +51,8 @@ fn assign(
 }
 
 ///|
-fn Grid::parse(s : String) -> Grid[@immut/sorted_set.T[Char]] {
-  let digits = @immut/sorted_set.from_array(cols.to_array())
+fn Grid::parse(s : String) -> Grid[@sorted_set.SortedSet[Char]] {
+  let digits = @sorted_set.from_array(cols.to_array())
   let values = Grid::new(digits)
   let chars = s
     .iter()
@@ -62,7 +62,7 @@ fn Grid::parse(s : String) -> Grid[@immut/sorted_set.T[Char]] {
   for p in pairs {
     let (square, digit) = p
     if digit is ('1'..='9') {
-      if not(assign(values, square, digit)) {
+      if !assign(values, square, digit) {
         // println("parseGrid(): found contradiction")
         abort("parseGrid(): found contradiction")
       }
@@ -72,13 +72,15 @@ fn Grid::parse(s : String) -> Grid[@immut/sorted_set.T[Char]] {
 }
 
 ///|
-fn Grid::format(self : Grid[@immut/sorted_set.T[Char]]) -> String {
+fn Grid::format(self : Grid[@sorted_set.SortedSet[Char]]) -> String {
   let rep = Array::make(81, "")
   let mut i = 0
   let mut maxWidth = 0
   while i < 81 {
-    rep[i] = self._[i].fold(init="", fn(acc, ch) { acc + ch.to_string() })
-    maxWidth = @math.maximum(rep[i].length(), maxWidth)
+    rep[i] = self.data[i].fold(init="", fn(acc, ch) { acc + ch.to_string() })
+    if rep[i].length() > maxWidth {
+      maxWidth = rep[i].length()
+    }
     i = i + 1
   }
   let buf = StringBuilder::new(size_hint=1000)
