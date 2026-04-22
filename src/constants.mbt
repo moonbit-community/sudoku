@@ -5,11 +5,11 @@ let rows = "ABCDEFGHI"
 let cols = "123456789"
 
 ///|
-typealias Squares = @immut/sorted_set.T[String]
+type Squares = @sorted_set.SortedSet[String]
 
 ///|
 fn cross(x : String, y : String, pred : (String) -> Bool) -> Squares {
-  let mut result = @immut/sorted_set.new()
+  let mut result : Squares = @sorted_set.new()
   for chx in x {
     for chy in y {
       let res = chx.to_string() + chy.to_string()
@@ -22,12 +22,12 @@ fn cross(x : String, y : String, pred : (String) -> Bool) -> Squares {
 }
 
 ///|
-let squares : Squares = cross(rows, cols, fn { _ => true })
+let squares : Squares = cross(rows, cols, fn(_) { true })
 
 ///|
 fn unit_of(square : String) -> Squares {
-  let row = square.charcode_at(0)
-  let col = square.charcode_at(1)
+  let row = square[0]
+  let col = square[1]
   let rows = match row {
     'A'..='C' => "ABC"
     'D'..='F' => "DEF"
@@ -40,12 +40,12 @@ fn unit_of(square : String) -> Squares {
     '7'..='9' => "789"
     _ => abort("unitOf: invalid col \{col}")
   }
-  cross(rows, cols, fn { s => s != square })
+  cross(rows, cols, fn(s) { s != square })
 }
 
 ///|
 let units : Grid[Squares] = {
-  let table = Grid::new(@immut/sorted_set.new())
+  let table : Grid[Squares] = Grid::new(@sorted_set.new())
   for square in squares {
     table[square] = unit_of(square)
   }
@@ -66,15 +66,15 @@ test {
 fn is_peer(this : String, other : String) -> Bool {
   this != other &&
   (
-    this.charcode_at(0) == other.charcode_at(0) ||
-    this.charcode_at(1) == other.charcode_at(1) ||
+    this[0] == other[0] ||
+    this[1] == other[1] ||
     units[other].contains(this)
   )
 }
 
 ///|
 let peers : Grid[Squares] = {
-  let table = Grid::new(@immut/sorted_set.new())
+  let table : Grid[Squares] = Grid::new(@sorted_set.new())
   for square in squares {
     table[square] = squares.filter(fn(sq) { is_peer(sq, square) })
   }

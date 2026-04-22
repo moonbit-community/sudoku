@@ -1,30 +1,27 @@
 ///|
-type Grid[T] FixedArray[T]
+struct Grid[T] {
+  data : FixedArray[T]
+}
 
 ///|
 fn[T] Grid::new(val : T) -> Grid[T] {
-  FixedArray::make(81, val)
+  { data: FixedArray::make(81, val) }
 }
 
 ///|
 fn[T] Grid::copy(self : Grid[T]) -> Grid[T] {
-  if self._.length() == 0 {
-    return []
+  let arr = FixedArray::make(self.data.length(), self.data[0])
+  for i in 0..<self.data.length() {
+    arr[i] = self.data[i]
   }
-  let arr = FixedArray::make(81, self._[0])
-  let mut i = 0
-  while i < 81 {
-    arr[i] = self._[i]
-    i = i + 1
-  }
-  return arr
+  { data: arr }
 }
 
 ///|
 fn square_to_int(s : String) -> Int {
-  if s.charcode_at(0) is ('A'..='I') && s.charcode_at(1) is ('1'..='9') {
-    let row = s.charcode_at(0) - 65 // 'A' <=> 0
-    let col = s.charcode_at(1) - 49 // '1' <=> 0
+  if s[0] is ('A'..='I') && s[1] is ('1'..='9') {
+    let row = (s[0] - 'A').to_int()
+    let col = (s[1] - '1').to_int()
     return row * 9 + col
   } else {
     abort("Grid_to_int(): \{s} is not a Grid")
@@ -41,20 +38,20 @@ test {
 ///|
 fn[T] Grid::op_get(self : Grid[T], square : String) -> T {
   let i = square_to_int(square)
-  self._[i]
+  self.data[i]
 }
 
 ///|
 fn[T] Grid::op_set(self : Grid[T], square : String, x : T) -> Unit {
   let i = square_to_int(square)
-  self._[i] = x
+  self.data[i] = x
 }
 
 ///|
 fn[T] Grid::contains(self : Grid[T], pred : (T) -> Bool) -> Bool {
   let mut result = false
-  for i = 0; i < self._.length(); i = i + 1 {
-    result = result || pred(self._[i])
+  for i in 0..<self.data.length() {
+    result = result || pred(self.data[i])
     if result {
       break
     }

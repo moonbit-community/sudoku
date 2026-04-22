@@ -1,4 +1,7 @@
 {
+    "import": [
+        "moonbitlang/core/immut/sorted_set"
+    ],
     "link": {
         "wasm": {
             "exports": [
