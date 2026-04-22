@@ -1,6 +1,6 @@
 ///|
 fn search(
-  values : Grid[@sorted_set.SortedSet[Char]]
+  values : Grid[@sorted_set.SortedSet[Char]],
 ) -> Grid[@sorted_set.SortedSet[Char]]? {
   if values.contains(fn(digits) { !(digits.length() == 1) }) {
     let mut minsq = ""
@@ -56,7 +56,6 @@ test {
       #| 5  7  3 | 2  9  1 | 6  8  4
       #| 1  6  4 | 8  7  5 | 2  9  3
       #|
-    )
-    ,
+    ),
   )
 }

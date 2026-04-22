@@ -58,19 +58,14 @@ test {
     units["A1"].to_array(),
     content=(
       #|["A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
-    )
-    ,
+    ),
   )
 }
 
 ///|
 fn is_peer(this : String, other : String) -> Bool {
   this != other &&
-  (
-    this[0] == other[0] ||
-    this[1] == other[1] ||
-    units[other].contains(this)
-  )
+  (this[0] == other[0] || this[1] == other[1] || units[other].contains(this))
 }
 
 ///|
