@@ -1,6 +1,6 @@
 ///|
 pub fn init_values() -> Grid[@sorted_set.SortedSet[Char]] {
-  let digits = @sorted_set.from_array(cols.to_array())
+  let digits = @sorted_set.SortedSet(cols.to_array())
   Grid::new(digits)
 }
 

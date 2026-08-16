@@ -22,4 +22,3 @@ type Grid[T]
 // Type aliases
 
 // Traits
-
