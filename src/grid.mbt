@@ -36,13 +36,15 @@ test {
 }
 
 ///|
-fn[T] Grid::op_get(self : Grid[T], square : String) -> T {
+#alias("_[_]")
+fn[T] Grid::get(self : Grid[T], square : String) -> T {
   let i = square_to_int(square)
   self.data[i]
 }
 
 ///|
-fn[T] Grid::op_set(self : Grid[T], square : String, x : T) -> Unit {
+#alias("_[_]=_")
+fn[T] Grid::set(self : Grid[T], square : String, x : T) -> Unit {
   let i = square_to_int(square)
   self.data[i] = x
 }
