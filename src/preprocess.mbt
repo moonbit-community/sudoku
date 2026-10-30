@@ -56,12 +56,12 @@ fn Grid::parse(s : String) -> Grid[@sorted_set.SortedSet[Char]] {
   let values = Grid::new(digits)
   let chars = s
     .iter()
-    .filter(fn(ch) { ch is ('0'..='9') || ch == '.' })
+    .filter(fn(ch) { ch is ('0'..<='9') || ch == '.' })
     .collect()
   let pairs = squares.to_array().zip(chars)
   for p in pairs {
     let (square, digit) = p
-    if digit is ('1'..='9') {
+    if digit is ('1'..<='9') {
       if !assign(values, square, digit) {
         // println("parseGrid(): found contradiction")
         abort("parseGrid(): found contradiction")
@@ -83,7 +83,7 @@ fn Grid::format(self : Grid[@sorted_set.SortedSet[Char]]) -> String {
     }
     i = i + 1
   }
-  let buf = StringBuilder::new(size_hint=1000)
+  let buf = StringBuilder(size_hint=1000)
   i = 0
   while i < 81 {
     buf.write_string(" ")

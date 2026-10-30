@@ -4,15 +4,15 @@
 
 ///|
 fn puzzle_chars(g : String) -> Array[Char] {
-  g.iter().filter(fn(ch) { ch is ('0'..='9') || ch == '.' }).collect()
+  g.iter().filter(fn(ch) { ch is ('0'..<='9') || ch == '.' }).collect()
 }
 
 ///|
 fn puzzles_from_raw(raw : String) -> Array[String] {
-  let puzzles = Array::new()
-  let current = Array::new()
+  let puzzles = Array()
+  let current = Array()
   for ch in raw {
-    if ch is ('0'..='9') || ch == '.' {
+    if ch is ('0'..<='9') || ch == '.' {
       current.push(ch)
       if current.length() == 81 {
         puzzles.push(String::from_array(current))
@@ -28,7 +28,7 @@ fn puzzles_from_raw(raw : String) -> Array[String] {
 
 ///|
 fn solved_chars(values : Grid[@sorted_set.SortedSet[Char]]) -> Array[Char]? {
-  let result = Array::new(capacity=81)
+  let result = Array(capacity=81)
   for square in squares {
     let choices = values[square]
     if choices.length() != 1 {
@@ -53,7 +53,7 @@ fn has_all_digits(seen : @sorted_set.SortedSet[Char]) -> Bool {
 }
 
 ///|
-fn unit_solved(solution : Array[Char], index : (Int) -> Int) -> Bool {
+fn unit_solved(solution : Array[Char], index : (Int32) -> Int32) -> Bool {
   let mut seen : @sorted_set.SortedSet[Char] = @sorted_set.new()
   for offset in 0..<9 {
     seen = seen.add(solution[index(offset)])
@@ -97,7 +97,7 @@ fn givens_preserved(puzzle : Array[Char], solution : Array[Char]) -> Bool {
   }
   for i in 0..<81 {
     let given = puzzle[i]
-    if given is ('1'..='9') && solution[i] != given {
+    if given is ('1'..<='9') && solution[i] != given {
       return false
     }
   }
@@ -125,7 +125,7 @@ fn solves_puzzle(puzzle : String) -> Bool {
 fn assert_all_solved(
   name : String,
   puzzles : Array[String],
-  expected : Int,
+  expected : Int32,
 ) -> Unit {
   if puzzles.length() != expected {
     abort("\{name} expected \{expected} puzzles, got \{puzzles.length()}")

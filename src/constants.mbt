@@ -29,15 +29,15 @@ fn unit_of(square : String) -> Squares {
   let row = square[0]
   let col = square[1]
   let rows = match row {
-    'A'..='C' => "ABC"
-    'D'..='F' => "DEF"
-    'G'..='I' => "GHI"
+    'A'..<='C' => "ABC"
+    'D'..<='F' => "DEF"
+    'G'..<='I' => "GHI"
     _ => abort("unitOf: invalid row \{row}")
   }
   let cols = match col {
-    '1'..='3' => "123"
-    '4'..='6' => "456"
-    '7'..='9' => "789"
+    '1'..<='3' => "123"
+    '4'..<='6' => "456"
+    '7'..<='9' => "789"
     _ => abort("unitOf: invalid col \{col}")
   }
   cross(rows, cols, fn(s) { s != square })

@@ -6,9 +6,9 @@ import {
 }
 
 // Values
-pub fn ij_assign(Grid[@sorted_set.SortedSet[Char]], Int, Int, Int) -> Bool
+pub fn ij_assign(Grid[@sorted_set.SortedSet[Char]], Int32, Int32, Int32) -> Bool
 
-pub fn ij_read(Grid[@sorted_set.SortedSet[Char]], Int, Int) -> Int
+pub fn ij_read(Grid[@sorted_set.SortedSet[Char]], Int32, Int32) -> Int32
 
 pub fn init_values() -> Grid[@sorted_set.SortedSet[Char]]
 

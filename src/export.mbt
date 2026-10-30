@@ -17,21 +17,21 @@ pub fn solve_values(
 ///|
 pub fn ij_assign(
   values : Grid[@sorted_set.SortedSet[Char]],
-  i : Int,
-  j : Int,
-  val : Int,
+  i : Int32,
+  j : Int32,
+  val : Int32,
 ) -> Bool {
   let key = "\{Int::unsafe_to_char(rows[i].to_int())}\{Int::unsafe_to_char(cols[j].to_int())}"
-  let val = Int::unsafe_to_char(val + 48)
+  let val = Int32::unsafe_to_char(val + 48)
   assign(values, key, val)
 }
 
 ///|
 pub fn ij_read(
   values : Grid[@sorted_set.SortedSet[Char]],
-  i : Int,
-  j : Int,
-) -> Int {
+  i : Int32,
+  j : Int32,
+) -> Int32 {
   let key = "\{Int::unsafe_to_char(rows[i].to_int())}\{Int::unsafe_to_char(cols[j].to_int())}"
   let digit = values[key].min()
   digit.to_int() - 48
