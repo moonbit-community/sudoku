@@ -5,7 +5,7 @@ struct Grid[T] {
 
 ///|
 fn[T] Grid::new(val : T) -> Grid[T] {
-  { data: FixedArray::make(81, val) }
+  { data: FixedArray::make(81, val), }
 }
 
 ///|
@@ -14,12 +14,12 @@ fn[T] Grid::copy(self : Grid[T]) -> Grid[T] {
   for i in 0..<self.data.length() {
     arr[i] = self.data[i]
   }
-  { data: arr }
+  { data: arr, }
 }
 
 ///|
-fn square_to_int(s : String) -> Int {
-  if s[0] is ('A'..='I') && s[1] is ('1'..='9') {
+fn square_to_int(s : String) -> Int32 {
+  if s[0] is ('A'..<='I') && s[1] is ('1'..<='9') {
     let row = (s[0] - 'A').to_int()
     let col = (s[1] - '1').to_int()
     return row * 9 + col
